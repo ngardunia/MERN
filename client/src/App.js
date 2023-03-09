@@ -4,14 +4,20 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 // TODO: import apollo
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 // TODO: create graphql endpoint
 // create request middleware for auth
 // get auth token from local storage
+const client = new ApolloClient({
+  uri: '/graphql',
+  cache: new InMemoryCache(),
+});
 
 function App() {
   // TODO: refactor to include apollo
   return (
+  <ApolloProvider client={client}>
     <Router>
       <>
         <Navbar />
@@ -31,6 +37,7 @@ function App() {
         </Routes>
       </>
     </Router>
+  </ApolloProvider>
   );
 }
 
